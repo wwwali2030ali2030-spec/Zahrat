@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار لزهورة</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext x='0' y='20' font-size='20'%3E🎀%3C/text%3E%3C/svg%3E" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Changa', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFD1DC 0%, #FFB6C1 50%, #FFC0CB 100%);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي بسبب العناصر العائمة */
+        }
+
+        .background-element {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .background-element:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .background-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .background-element:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 4s; }
+        .background-element:nth-child(4) { top: 50%; left: 20%; animation-delay: 6s; }
+        .background-element:nth-child(5) { bottom: 5%; right: 5%; animation-delay: 8s; }
+        .background-element:nth-child(6) { top: 30%; right: 30%; animation-delay: 1s; }
+        .background-element:nth-child(7) { bottom: 40%; left: 50%; animation-delay: 3s; }
+        .background-element:nth-child(8) { top: 60%; right: 15%; animation-delay: 5s; }
+        .background-element:nth-child(9) { bottom: 25%; left: 30%; animation-delay: 7s; }
+        .background-element:nth-child(10) { top: 5%; right: 25%; animation-delay: 9s; }
+
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 90%;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            z-index: 1; /* لضمان ظهور المحتوى فوق الخلفية العائمة */
+        }
+
+        h1 {
+            color: #E91E63;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #C2185B;
+            margin-top: 30px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #F8BBD0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background-color: #FFF0F5;
+            border: 1px solid #FFC0CB;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: right;
+            position: relative;
+        }
+
+        .question img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .question p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #444;
+            font-weight: bold;
+        }
+
+        .options label {
+            display: block;
+            background-color: #FCE4EC;
+            border: 1px solid #F48FB1;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: right;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .options label:hover {
+            background-color: #F8BBD0;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .options input[type="radio"] {
+            margin-left: 10px;
+            accent-color: #E91E63;
+            transform: scale(1.2);
+            position: relative;
+            top: 2px;
+        }
+
+        .options input[type="radio"]:checked + span {
+            font-weight: bold;
+            color: #C2185B;
+        }
+
+        .submit-btn {
+            background-color: #E91E63;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 30px;
+            font-family: 'Changa', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn:hover {
+            background-color: #C2185B;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .result {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #FFF0F5;
+            border-radius: 15px;
+            border: 2px dashed #F06292;
+            font-size: 1.5em;
+            color: #C2185B;
+            font-weight: bold;
+            display: none; /* مخفي في البداية */
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid;
+            display: inline-block; /* يجعل العنصر يتخذ عرض المحتوى فقط */
+            margin-right: auto; /* يدفع العنصر لليمين */
+            margin-left: auto; /* يدفع العنصر لليمين */
+        }
+
+        .feedback.correct {
+            color: #28A745;
+            background-color: #D4EDDA;
+            border-color: #28A745;
+        }
+
+        .feedback.wrong {
+            color: #DC3545;
+            background-color: #F8D7DA;
+            border-color: #DC3545;
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFC0CB; /* وردي فاتح */
+            border-radius: 50%;
+            animation: confetti-fall 3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translate(0, -50px) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <span class="background-element">🩷</span>
+    <span class="background-element">🎀</span>
+    <span class="background-element">🩷</span>
+    <span class="background-element">🎀</span>
+    <span class="background-element">🩷</span>
+    <span class="background-element">🎀</span>
+    <span class="background-element">🩷</span>
+    <span class="background-element">🎀</span>
+    <span class="background-element">🩷</span>
+    <span class="background-element">🎀</span>
+
+
+    <div class="container">
+        <h1>الاختبار بس لزهورة</h1>
+
+        <form id="quizForm">
+            <h2>أسئلة الصح والخطأ (True/False)</h2>
+
+            <div class="question" id="q1">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+1" alt="صورة سؤال 1">
+                <p>1. هل الماوس هو جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q1" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q2">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+2" alt="صورة سؤال 2">
+                <p>2. الشاشة هي جهاز إخراج؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q2" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q3">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+3" alt="صورة سؤال 3">
+                <p>3. الـ RAM تحتفظ بالبيانات بعد إطفاء الكمبيوتر؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q3" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q4">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+4" alt="صورة سؤال 4">
+                <p>4. الطابعة تعتبر جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q4" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q5">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+5" alt="صورة سؤال 5">
+                <p>5. وحدة المعالجة المركزية (CPU) هي عقل الكمبيوتر؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q5" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q6">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+6" alt="صورة سؤال 6">
+                <p>6. السماعات هي جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q6" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q7">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+7" alt="صورة سؤال 7">
+                <p>7. القرص الصلب (HDD) هو وحدة تخزين ثانوية؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q7" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q8">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+8" alt="صورة سؤال 8">
+                <p>8. الميكروفون هو جهاز إخراج؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q8" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q9">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+9" alt="صورة سؤال 9">
+                <p>9. لوحة المفاتيح هي جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q9" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q10">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+10" alt="صورة سؤال 10">
+                <p>10. الـ ROM تفقد البيانات عند انقطاع التيار الكهربائي؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q10" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q11">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+11" alt="صورة سؤال 11">
+                <p>11. الكاميرا الرقمية هي جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q11" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q12">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+12" alt="صورة سؤال 12">
+                <p>12. الماسح الضوئي (Scanner) هو جهاز إخراج؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q12" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q13">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+13" alt="صورة سؤال 13">
+                <p>13. الـ USB Bus هو جهاز تخزين؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q13" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q14">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+14" alt="صورة سؤال 14">
+                <p>14. الـ Joystick يستخدم للتحكم بالألعاب؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q14" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q15">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+15" alt="صورة سؤال 15">
+                <p>15. الشاشة نوع CRT أقدم من LCD؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="true"> <span>صح</span></label>
+                    <label><input type="radio" name="q15" value="false"> <span>خطأ</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+
+            <h2>أسئلة الاختيارات (Multiple Choice)</h2>
+
+            <div class="question" id="q16">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+16" alt="صورة سؤال 16">
+                <p>16. أي من الأجهزة التالية هو جهاز إدخال؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="A"> <span>A) الطابعة</span></label>
+                    <label><input type="radio" name="q16" value="B"> <span>B) الشاشة</span></label>
+                    <label><input type="radio" name="q16" value="C"> <span>C) الماسح الضوئي</span></label>
+                    <label><input type="radio" name="q16" value="D"> <span>D) السماعات</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q17">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+17" alt="صورة سؤال 17">
+                <p>17. أي من التالي لا يفقد بياناته عند إطفاء الجهاز؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="A"> <span>A) RAM</span></label>
+                    <label><input type="radio" name="q17" value="B"> <span>B) ROM</span></label>
+                    <label><input type="radio" name="q17" value="C"> <span>C) Register</span></label>
+                    <label><input type="radio" name="q17" value="D"> <span>D) كل ما سبق</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q18">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+18" alt="صورة سؤال 18">
+                <p>18. أي من الوحدات التالية تعتبر وحدة معالجة؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="A"> <span>A) لوحة المفاتيح</span></label>
+                    <label><input type="radio" name="q18" value="B"> <span>B) الفأرة</span></label>
+                    <label><input type="radio" name="q18" value="C"> <span>C) ALU</span></label>
+                    <label><input type="radio" name="q18" value="D"> <span>D) الشاشة</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q19">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+19" alt="صورة سؤال 19">
+                <p>19. أي من هذه الأجهزة يقوم بإخراج الصوت؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="A"> <span>A) الميكروفون</span></label>
+                    <label><input type="radio" name="q19" value="B"> <span>B) السماعات</span></label>
+                    <label><input type="radio" name="q19" value="C"> <span>C) الماسح الضوئي</span></label>
+                    <label><input type="radio" name="q19" value="D"> <span>D) كاميرا الويب</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q20">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+20" alt="صورة سؤال 20">
+                <p>20. ما هي وظيفة وحدة التحكم (Control Unit)؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="A"> <span>A) إجراء العمليات الحسابية</span></label>
+                    <label><input type="radio" name="q20" value="B"> <span>B) تخزين البيانات</span></label>
+                    <label><input type="radio" name="q20" value="C"> <span>C) تنسيق وتنظيم العمليات</span></label>
+                    <label>
+                        <input type="radio" name="q20" value="D"> <span>D) عرض الصور</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q21">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+21" alt="صورة سؤال 21">
+                <p>21. أي مما يلي يعتبر وحدة تخزين أساسية؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="A"> <span>A) القرص الصلب</span></label>
+                    <label><input type="radio" name="q21" value="B"> <span>B) القرص المرن</span></label>
+                    <label><input type="radio" name="q21" value="C"> <span>C) RAM</span></label>
+                    <label><input type="radio" name="q21" value="D"> <span>D) DVD</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q22">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+22" alt="صورة سؤال 22">
+                <p>22. أي من أنواع الشاشات التالية هي الأقدم؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="A"> <span>A) LCD</span></label>
+                    <label><input type="radio" name="q22" value="B"> <span>B) LED</span></label>
+                    <label><input type="radio" name="q22" value="C"> <span>C) CRT</span></label>
+                    <label><input type="radio" name="q22" value="D"> <span>D) OLED</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q23">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+23" alt="صورة سؤال 23">
+                <p>23. جهاز يستخدم لتحويل المستندات الورقية إلى بيانات رقمية؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="A"> <span>A) الطابعة</span></label>
+                    <label><input type="radio" name="q23" value="B"> <span>B) الماسح الضوئي</span></label>
+                    <label><input type="radio" name="q23" value="C"> <span>C) الشاشة</span></label>
+                    <label><input type="radio" name="q23" value="D"> <span>D) الميكروفون</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q24">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+24" alt="صورة سؤال 24">
+                <p>24. أي من هذه الوحدات تعتبر جهاز إخراج؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="A"> <span>A) الماوس</span></label>
+                    <label><input type="radio" name="q24" value="B"> <span>B) لوحة اللمس</span></label>
+                    <label><input type="radio" name="q24" value="C"> <span>C) السماعات</span></label>
+                    <label><input type="radio" name="q24" value="D"> <span>D) الكيبورد</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q25">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+25" alt="صورة سؤال 25">
+                <p>25. ما هي سعة تخزين الـ CD؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="A"> <span>A) 4.7 GB</span></label>
+                    <label><input type="radio" name="q25" value="B"> <span>B) 700 MB</span></label>
+                    <label><input type="radio" name="q25" value="C"> <span>C) 25 GB</span></label>
+                    <label><input type="radio" name="q25" value="D"> <span>D) 1.44 MB</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q26">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+26" alt="صورة سؤال 26">
+                <p>26. أي الأجهزة يستخدم كبديل للماوس في اللابتوب؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="A"> <span>A) Joystick</span></label>
+                    <label><input type="radio" name="q26" value="B"> <span>B) Track Ball</span></label>
+                    <label><input type="radio" name="q26" value="C"> <span>C) Touch Pad</span></label>
+                    <label><input type="radio" name="q26" value="D"> <span>D) Scanner</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q27">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+27" alt="صورة سؤال 27">
+                <p>27. أي من التالي يعتبر جزءاً من وحدة المعالجة المركزية (CPU)؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="A"> <span>A) وحدة التحكم CU</span></label>
+                    <label><input type="radio" name="q27" value="B"> <span>B) RAM</span></label>
+                    <label><input type="radio" name="q27" value="C"> <span>C) الشاشة</span></label>
+                    <label><input type="radio" name="q27" value="D"> <span>D) الهارد ديسك</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q28">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+28" alt="صورة سؤال 28">
+                <p>28. ما هي سعة تخزين القرص المرن (Floppy Disk)؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="A"> <span>A) 700 MB</span></label>
+                    <label><input type="radio" name="q28" value="B"> <span>B) 1.44 MB</span></label>
+                    <label><input type="radio" name="q28" value="C"> <span>C) 4.7 GB</span></label>
+                    <label><input type="radio" name="q28" value="D"> <span>D) 25 GB</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q29">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+29" alt="صورة سؤال 29">
+                <p>29. أي وحدة تخزين تستخدم تقنية الليزر الأزرق؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="A"> <span>A) CD</span></label>
+                    <label><input type="radio" name="q29" value="B"> <span>B) DVD</span></label>
+                    <label><input type="radio" name="q29" value="C"> <span>C) Blue Ray</span></label>
+                    <label><input type="radio" name="q29" value="D"> <span>D) RAM</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question" id="q30">
+                <img src="https://via.placeholder.com/400x200/FFC0CB/FFFFFF?text=صورة+لسؤال+30" alt="صورة سؤال 30">
+                <p>30. ما هو اختصار "ذاكرة الوصول العشوائي"؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="A"> <span>A) ROM</span></label>
+                    <label><input type="radio" name="q30" value="B"> <span>B) CPU</span></label>
+                    <label><input type="radio" name="q30" value="C"> <span>C) RAM</span></label>
+                    <label><input type="radio" name="q30" value="D"> <span>D) ALU</span></label>
+                </div>
+                <div class="feedback" style="display: none;"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="calculateResult()">خلصت! شوفتيني النتيجة 🎀</button>
+        </form>
+
+        <div id="finalResult" class="result"></div>
+    </div>
+
+    <div id="confettiContainer" class="confetti-container"></div>
+
+    <script>
+        const answers = {
+            q1: "true", q2: "true", q3: "false", q4: "false", q5: "true",
+            q6: "false", q7: "true", q8: "false", q9: "true", q10: "false",
+            q11: "true", q12: "false", q13: "false", q14: "true", q15: "true",
+            q16: "C", q17: "B", q18: "C", q19: "B", q20: "C",
+            q21: "C", q22: "C", q23: "B", q24: "C", q25: "B",
+            q26: "C", q27: "A", q28: "B", q29: "C", q30: "C"
+        };
+
+        function launchConfetti() {
+            const container = document.getElementById('confettiContainer');
+            for (let i = 0; i < 40; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+                confetti.style.setProperty('--y', (window.innerHeight + 100) + 'px');
+                confetti.style.backgroundColor = ['#FFC0CB', '#FFB6C1', '#F8BBD0', '#F48FB1'][Math.floor(Math.random() * 4)];
+                confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                container.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function calculateResult() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            for (let i = 1; i <= 30; i++) {
+                const questionDiv = document.getElementById('q' + i);
+                const feedbackDiv = questionDiv.querySelector('.feedback');
+                const selected = form.elements['q' + i].value;
+                feedbackDiv.style.display = 'block';
+
+                if (selected === answers['q' + i]) {
+                    score++;
+                    feedbackDiv.innerText = "عفيةةة بزهورة 🩷";
+                    feedbackDiv.className = "feedback correct";
+                    launchConfetti();
+                } else {
+                    feedbackDiv.innerText = "اجابتج هاي حل لغير سؤال 🥲";
+                    feedbackDiv.className = "feedback wrong";
+                }
+            }
+            const finalResultDiv = document.getElementById('finalResult');
+            finalResultDiv.style.display = 'block';
+            finalResultDiv.innerHTML = `عشتي يا زهورة! درجتج هي: ${score} من 30 <br> 🌸🎀🩷`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
